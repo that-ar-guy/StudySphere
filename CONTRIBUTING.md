@@ -71,5 +71,51 @@ To get started with development, follow these steps:
     python manage.py migrate  
   ```
 
+6. ** Start the Development Server **
+     ```bash
+     python manage.py runserver
+     ```
+
+7. ** Test the Setup**
+     Open your browser and go to `http://127.0.0.1:8000/`
+
+
+## Submitting a Pull Request
+
+When you're ready to contribute, follow these steps:
+
+1. **Create a Branch:**
+
+Create a new branch for your work:
+```bash
+git checkout -b feature-or-bug-name  
+```
+
+2.**Make Your Changes:**
+
+Implement your changes and make sure your code is clean and well-documented.
+
+3.**Run Tests:**
+
+Ensure all existing tests pass and add tests for any new functionality.
+
+4. **Commit Your Changes:**
+
+```bash
+git add .  
+git commit -m "Describe your changes here"  
+```
+
+5.**Push Your Branch:**
+
+```bash
+   git push origin feature-or-bug-name  
+```
+
+6. **Open a Pull Request:**
+   
+Go to the original repository and open a pull request. Provide a clear description of your changes and link to any relevant issues.
+
+ 
  
 
