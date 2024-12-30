@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StudySphere</title>
+</head>
+<body>
+    <h1>Welcome to StudySphere</h1>
+    <h2>Subjects:</h2>
+    <ul>
+        {% for subject in subjects %}
+            <li>{{ subject.name }} (Priority: {{ subject.priority }})</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
