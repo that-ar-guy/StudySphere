@@ -8,7 +8,14 @@
     <h2>Subjects:</h2>
     <ul>
         {% for subject in subjects %}
-            <li>{{ subject.name }} (Priority: {{ subject.priority }})</li>
+            <li>
+                <strong>{{ subject.name }}</strong> (Priority: {{ subject.priority }}, Exam Date: {{ subject.exam_date }})
+                <ul>
+                    {% for unit in subject.units.all %}
+                        <li>{{ unit.name }} - {{ unit.is_completed|yesno:"Completed,Pending" }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
         {% endfor %}
     </ul>
 </body>
