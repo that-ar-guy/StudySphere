@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Exam, Subject, Unit
 
+
 class UnitInline(admin.TabularInline):
     model = Unit
     extra = 1  # Show one extra blank field for new Unit entries
@@ -12,7 +13,7 @@ class SubjectAdmin(admin.ModelAdmin):
 
 
 class ExamAdmin(admin.ModelAdmin):
-    list_display = ('name', 'date')  # Display relevant fields
+    list_display = ('name',)  # Use a tuple (note the trailing comma)
 
 
 admin.site.register(Exam, ExamAdmin)
