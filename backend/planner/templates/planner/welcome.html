@@ -5,14 +5,21 @@
 </head>
 <body>
     <h1>Welcome to StudySphere</h1>
-    <h2>Subjects:</h2>
+    <a href="/add-exam/">Add a New Exam</a>
     <ul>
-        {% for subject in subjects %}
+        {% for exam in exams %}
             <li>
-                <strong>{{ subject.name }}</strong> (Priority: {{ subject.priority }}, Exam Date: {{ subject.exam_date }})
+                <h2>{{ exam.name }}</h2>
                 <ul>
-                    {% for unit in subject.units.all %}
-                        <li>{{ unit.name }} - {{ unit.is_completed|yesno:"Completed,Pending" }}</li>
+                    {% for subject in exam.subjects.all %}
+                        <li>
+                            {{ subject.name }} (Priority: {{ subject.priority }}, Exam Date: {{ subject.exam_date }})
+                            <ul>
+                                {% for unit in subject.units.all %}
+                                    <li>{{ unit.name }} - {{ unit.is_completed|yesno:"Completed,Pending" }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
                     {% endfor %}
                 </ul>
             </li>

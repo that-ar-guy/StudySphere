@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Subjects</title>
+</head>
+<body>
+    <h2>Add Subjects to Exam: {{ exam.name }}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <label>Subject Name:</label>
+    <input type="text" name="name" required>
+    
+    <label>Priority:</label>
+    <input type="number" name="priority" required>
+    
+    <label>Exam Date:</label>
+    <input type="date" name="exam_date" required>
+    
+    <button type="submit">Add Subject</button>
+</form>
+
+<h3>Existing Subjects:</h3>
+<ul>
+    {% for subject in subjects %}
+        <li>
+            {{ subject.name }} - Priority: {{ subject.priority }} - Exam Date: {{ subject.exam_date }}
+            <a href="{% url 'add_units' subject.id %}" style="margin-left: 10px;">
+                <button type="button">Add Units</button>
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+<a href="/">Back to Home</a>
+</body>
+</html>

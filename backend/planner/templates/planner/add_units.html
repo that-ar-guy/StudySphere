@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Units</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        input[type="text"], input[type="checkbox"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            background: #fff;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        ul li span {
+            font-weight: bold;
+        }
+
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Add Units to Subject: {{ subject.name }}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <label>Unit Name:</label>
+    <input type="text" name="name" required>
+    
+    <label>Completed:</label>
+    <input type="checkbox" name="is_completed">
+    
+    <button type="submit">Add Unit</button>
+</form>
+
+<h3>Existing Units:</h3>
+<ul>
+    {% for unit in units %}
+        <li>
+            {{ unit.name }} - Status: 
+            {% if unit.is_completed %}
+                Completed
+            {% else %}
+                Pending
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+<a href="/">Back to Home</a>
+<a href="{% url 'add_subjects' subject.exam.id %}">Back to Subjects</a>
+</body>
+</html>
