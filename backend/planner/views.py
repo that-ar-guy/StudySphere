@@ -19,29 +19,26 @@ def add_exam(request):
     return render(request, 'planner/add_exam.html', {'form': form})
 
 
+
+# Add Subjects to an Exam
 def add_subjects(request, exam_id):
     exam = get_object_or_404(Exam, id=exam_id)
     if request.method == 'POST':
-        form = SubjectForm(request.POST)
-        if form.is_valid():
-            subject = form.save(commit=False)
-            subject.exam = exam  # Assign the subject to the correct exam
-            subject.save()
-            return redirect('add_units', subject_id=subject.id)  # Redirect to add units
-    else:
-        form = SubjectForm()
-    return render(request, 'planner/add_subjects.html', {'form': form, 'exam': exam})
+        name = request.POST.get('name')
+        priority = request.POST.get('priority')
+        exam_date = request.POST.get('exam_date')
+        Subject.objects.create(exam=exam, name=name, priority=priority, exam_date=exam_date)
+        return redirect('add_subjects', exam_id=exam_id)  # Redirect to the same page to add more subjects
+    subjects = exam.subjects.all()  # Fetch all subjects for this exam
+    return render(request, 'planner/add_subjects.html', {'exam': exam, 'subjects': subjects})
 
-
+# Example of add_units function
 def add_units(request, subject_id):
     subject = get_object_or_404(Subject, id=subject_id)
     if request.method == 'POST':
-        form = UnitForm(request.POST)
-        if form.is_valid():
-            unit = form.save(commit=False)
-            unit.subject = subject  # Assign the unit to the correct subject
-            unit.save()
-            return redirect('welcome')  # Redirect back to the welcome page
-    else:
-        form = UnitForm()
-    return render(request, 'planner/add_units.html', {'form': form, 'subject': subject})
+        name = request.POST.get('name')
+        is_completed = request.POST.get('is_completed') == 'on'
+        Unit.objects.create(subject=subject, name=name, is_completed=is_completed)
+        return redirect('add_units', subject_id=subject_id)
+    units = subject.units.all()
+    return render(request, 'planner/add_units.html', {'subject': subject, 'units': units})
